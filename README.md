@@ -30,7 +30,7 @@ Welcome to the **Chess Game** project! This is a two-player chess game written i
 ## 🛠️ Technologies Used
 
 - **Programming Language:** Java
-- **Libraries/Frameworks:** JavaFX for the graphical interface
+- **Libraries/Frameworks:** Swings for the graphical interface
 - core java for game logic
 
 
