@@ -77,6 +77,44 @@ Welcome to the **Chess Game** project! This is a two-player chess game written i
 
 ---
 
+## Project Structure
+
+The project is a Java Swing-based Chess Game. It uses standard Java libraries (`javax.swing`, `java.awt`) for the UI and game loop.
+
+### Key Files & Directories:
+
+- **src/main/**: Contains the core game loop and board logic.
+  - **Main.java**: The entry point. Initializes the `JFrame` window and starts the `GamePanel`.
+  - **GamePanel.java**: The heart of the game. It:
+    - Runs the game loop (60 FPS) via `Thread` and `Runnable`.
+    - Handles mouse input for selecting and moving pieces.
+    - Manages the entire game state (whose turn, check/checkmate detection, promotion, castling).
+    - Renders the board and pieces using `paintComponent`.
+  - **Board.java**: Responsible for drawing the 8×8 checkerboard pattern.
+
+- **src/piece/**: Contains the logic for individual chess pieces.
+  - **Piece.java**: The base class for all pieces. It handles:
+    - Coordinates (`col`, `row`) and screen position (`x`, `y`).
+    - Image loading.
+    - Common validation logic like checking for collisions (`pieceIsOnStraightLine`, `pieceIsOnDiagonalLine`).
+  - **Subclasses (King, Queen, Rook, etc.)**:  
+    Each piece has its own class extending `Piece` that overrides `canMove()` to define valid movement patterns.
+
+### How It Works
+
+1. **Game Loop**:  
+   `GamePanel.run()` continually updates the game state (`update()`) and redraws the screen (`repaint()`).
+
+2. **Move Validation**:
+   - When you drag a piece, `GamePanel` calls `simulate()` to check if the move is valid based on the piece's rules and board state (e.g., is the king in check?).
+   - It uses a "simulation" list (`simPieces`) to temporarily test moves without permanently altering the board until confirmed.
+
+3. **Graphics**:  
+   The game uses `Graphics2D` to draw images (`BufferedImage`) loaded from the `res/` folder (implied by `Piece.getImage` usage).
+
+
+---
+
 ## 🤝 Contributing
 
 This project is in active development and contributions are encouraged! Here’s how you can help:
